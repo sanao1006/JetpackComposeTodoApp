@@ -1,18 +1,19 @@
 package com.example.jetpacktodoapp
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDAO {
     @Insert
-    fun insertTask(task: Task)
+    suspend fun insertTask(task: Task)
 
     @Query("SELECT * FROM Task")
-    fun loadAllTask(): List<Task>
+    fun loadAllTask(): Flow<List<Task>>
 
     @Update
-    fun updateTask(task: Task)
+    suspend fun updateTask(task: Task)
 
     @Delete
-    fun deleteTask(task: Task)
+    suspend fun deleteTask(task: Task)
 }
