@@ -38,13 +38,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainContent() {
-    val isShowDialog = remember { mutableStateOf(false) }
-    if (isShowDialog.value) {
-        EditDialog(isShowDialog)
+fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
+
+    if (viewModel.isShowDialog) {
+        EditDialog()
     }
     Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = { isShowDialog.value = true }) {
+        FloatingActionButton(onClick = { viewModel.isShowDialog = true }) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "新規作成")
         }
     }){

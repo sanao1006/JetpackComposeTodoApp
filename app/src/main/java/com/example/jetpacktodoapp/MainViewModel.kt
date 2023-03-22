@@ -13,6 +13,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val taskDAO: TaskDAO) : ViewModel() {
     var title by mutableStateOf("")
     var description by mutableStateOf("")
+    var isShowDialog by mutableStateOf(false)
 
     fun createTask() {
         viewModelScope.launch {

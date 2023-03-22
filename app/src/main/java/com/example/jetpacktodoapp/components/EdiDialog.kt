@@ -14,12 +14,11 @@ import com.example.jetpacktodoapp.MainViewModel
 
 @Composable
 fun EditDialog(
-    isShowDialog: MutableState<Boolean>,
     viewModel: MainViewModel = hiltViewModel()
 ) {
 
     AlertDialog(
-        onDismissRequest = { isShowDialog.value = false },
+        onDismissRequest = { viewModel.isShowDialog = false },
         title = { Text(text = "新規作成") },
         text = {
             Column() {
@@ -32,14 +31,14 @@ fun EditDialog(
         buttons = {
             Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.Center) {
                 Spacer(modifier = Modifier.weight(1f))
-                Button(modifier = Modifier.width(120.dp), onClick = { isShowDialog.value = false }) {
+                Button(modifier = Modifier.width(120.dp), onClick = { viewModel.isShowDialog = false }) {
                     Text(text = "キャンセル")
                 }
 
                 Spacer(modifier = Modifier.width(10.dp))
 
                 Button(modifier = Modifier.width(120.dp),onClick = {
-                    isShowDialog.value = false
+                    viewModel.isShowDialog = false
                     viewModel.createTask()
 
                 }) {
