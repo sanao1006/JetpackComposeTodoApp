@@ -13,9 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetpacktodoapp.components.EditDialog
 import com.example.jetpacktodoapp.ui.theme.JetpackTodoAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,7 @@ fun MainContent() {
         FloatingActionButton(onClick = { isShowDialog.value = true }) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "新規作成")
         }
-    }) {
+    }){
 
     }
 }

@@ -76,6 +76,15 @@ dependencies {
     implementation"androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+//    def fragment_version = "1.5.5"
+//
+//    // Java language implementation
+//    implementation "androidx.fragment:fragment:$fragment_version"
+//    // Kotlin
+//    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+//    // Testing Fragments in Isolation
+//    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 }
 
 kapt {
