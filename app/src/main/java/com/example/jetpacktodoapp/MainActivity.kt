@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetpacktodoapp.components.EditDialog
+import com.example.jetpacktodoapp.components.TaskList
 import com.example.jetpacktodoapp.ui.theme.JetpackTodoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,9 +46,12 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
         FloatingActionButton(onClick = { viewModel.isShowDialog = true }) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "新規作成")
         }
-    }){
+    }) {
         val tasks by viewModel.tasks.collectAsState(initial = emptyList())
-
-
+        TaskList(
+            tasks = tasks,
+            onClickRow = { /* TODO */ },
+            onClickDelete = { /* TODO */ }
+        )
     }
 }
