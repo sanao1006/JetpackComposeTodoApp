@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,6 +15,8 @@ class MainViewModel @Inject constructor(private val taskDAO: TaskDAO) : ViewMode
     var title by mutableStateOf("")
     var description by mutableStateOf("")
     var isShowDialog by mutableStateOf(false)
+
+    val tasks = taskDAO.loadAllTask().distinctUntilChanged()
 
     fun createTask() {
         viewModelScope.launch {
