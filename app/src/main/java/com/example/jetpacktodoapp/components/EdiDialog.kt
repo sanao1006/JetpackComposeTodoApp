@@ -19,27 +19,35 @@ fun EditDialog(
 
     AlertDialog(
         onDismissRequest = { viewModel.isShowDialog = false },
-        title = { Text(text = "新規作成") },
+        title = { Text(text = if (viewModel.isEditing) "タスク更新" else "タスク新規作成") },
         text = {
             Column() {
                 Text(text = "タイトル")
                 TextField(value = viewModel.title, onValueChange = { viewModel.title = it })
                 Text(text = "詳細")
-                TextField(value = viewModel.description, onValueChange = { viewModel.description = it })
+                TextField(
+                    value = viewModel.description,
+                    onValueChange = { viewModel.description = it })
             }
         },
         buttons = {
             Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.Center) {
                 Spacer(modifier = Modifier.weight(1f))
-                Button(modifier = Modifier.width(120.dp), onClick = { viewModel.isShowDialog = false }) {
+                Button(
+                    modifier = Modifier.width(120.dp),
+                    onClick = { viewModel.isShowDialog = false }) {
                     Text(text = "キャンセル")
                 }
 
                 Spacer(modifier = Modifier.width(10.dp))
 
-                Button(modifier = Modifier.width(120.dp),onClick = {
+                Button(modifier = Modifier.width(120.dp), onClick = {
                     viewModel.isShowDialog = false
-                    viewModel.createTask()
+                    if (viewModel.isEditing) {
+                        viewModel.updateTask()
+                    } else {
+                        viewModel.createTask()
+                    }
 
                 }) {
                     Text(text = "OK")

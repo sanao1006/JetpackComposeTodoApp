@@ -18,6 +18,17 @@ class MainViewModel @Inject constructor(private val taskDAO: TaskDAO) : ViewMode
 
     val tasks = taskDAO.loadAllTask().distinctUntilChanged()
 
+    private var editingTask: Task? = null
+    val isEditing: Boolean
+        get() = editingTask != null
+
+    fun setEditingTask(task: Task) {
+        editingTask = task
+        title = task.title
+        description = task.description
+
+    }
+
     fun createTask() {
         viewModelScope.launch {
             var newTask = Task(title = title, description = description)
@@ -26,9 +37,19 @@ class MainViewModel @Inject constructor(private val taskDAO: TaskDAO) : ViewMode
         }
     }
 
-    fun deleteTask(task: Task){
+    fun deleteTask(task: Task) {
         viewModelScope.launch {
             taskDAO.deleteTask(task = task)
+        }
+    }
+
+    fun updateTask() {
+        editingTask?.let { task ->
+            viewModelScope.launch {
+                task.title = title
+                task.description = description
+                taskDAO.updateTask(task = task)
+            }
         }
     }
 }
