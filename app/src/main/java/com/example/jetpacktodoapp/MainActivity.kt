@@ -46,12 +46,12 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
         FloatingActionButton(onClick = { viewModel.isShowDialog = true }) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "新規作成")
         }
-    }) {
+    }) { it ->
         val tasks by viewModel.tasks.collectAsState(initial = emptyList())
         TaskList(
             tasks = tasks,
             onClickRow = { /* TODO */ },
-            onClickDelete = { /* TODO */ }
+            onClickDelete = { viewModel.deleteTask(it) }
         )
     }
 }
