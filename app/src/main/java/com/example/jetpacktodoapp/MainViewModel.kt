@@ -52,4 +52,10 @@ class MainViewModel @Inject constructor(private val taskDAO: TaskDAO) : ViewMode
             }
         }
     }
+
+    fun resetProperties(){
+        editingTask = null
+        title = ""
+        description = ""
+    }
 }
